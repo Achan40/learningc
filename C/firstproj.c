@@ -31,5 +31,21 @@ int main()
 	printf("If you do math w just ints, you will get ints back %d\n", 5 / 4 );
 	printf("using functions from math library %f %f \n", pow(3,2), floor(36.343));
 
+	/*Constants best practice is to keep them in caps*/
+	const int NUM = 5;
+	printf("%d\n", NUM);
+	const char SOMETEXT[] = "This is a constant";
+
+	/*Taking user input*/
+	/*int agetwo;
+	printf("Enter your age: \n");
+	scanf("%d", &agetwo);
+	printf("You are %d years old\n", agetwo);*/
+
+	char phrase[20];
+	printf("Enter your phrase: \n");
+	fgets(phrase, 20, stdin);
+	printf("This is your phrase %s \n", phrase);
+
 	return 0;
 }
