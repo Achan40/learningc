@@ -42,6 +42,28 @@ int main()
 
 	printf("%d\n", max(4, 10, 15));
 
+	/*switch statements*/
+	char grade = 'A';
+	switch(grade){
+		case 'A':
+			printf("You did great!\n");
+			break;
+		case 'B':
+			printf("You did okay!\n");
+			break;
+		case 'C':
+			printf("You did poorly!\n");
+			break;
+		case 'D':
+			printf("You did very poorly!\n");
+			break;
+		case 'F':
+			printf("You failed!\n");
+			break;
+		default:
+			printf("Invalid Grade\n");		
+	}
+
 	return 0;
 }
 
