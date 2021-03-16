@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*functions*/
 void sayHi(char name[], int age){
@@ -22,6 +23,15 @@ int max(int num1, int num2, int num3){
 
 /*prototyping a function*/
 double cubed(double num);
+
+/*strucst*/
+struct Student
+{
+	char name[50];
+	char major[50];
+	int age;
+	double gpa;
+};
 
 int main()
 {
@@ -63,6 +73,36 @@ int main()
 		default:
 			printf("Invalid Grade\n");		
 	}
+
+	/*using structs*/
+	struct Student student1;
+	student1.age = 22;
+	student1.gpa = 3.2;
+	strcpy(student1.name, "Jim");
+	strcpy(student1.major, "Economics");
+
+
+	struct Student student2;
+	student2.age = 25;
+	student2.gpa = 3.7;
+	strcpy(student1.name, "Aaron");
+	strcpy(student1.major, "Statistics");
+
+	printf("%f\n", student2.gpa);
+
+	/*while loops*/
+	int index = 1;
+	while(index <= 5){
+		printf("%d\n", index);
+		index++;
+	}
+
+	/*do while loop, does not check condition beforehand*/
+	int newindex = 6;
+	do {
+		printf("%d\n", newindex);
+		newindex++;
+	}while(newindex <= 5);
 
 	return 0;
 }
