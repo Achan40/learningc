@@ -31,5 +31,22 @@ int	main(){
 		printf("\n");
 	}
 
+	/*Memory adresses and pointers*/
+	int age = 30;
+	double gpa = 3.4;
+	char grade = 'A';
+
+	printf("age: %p\ngpa: %p\ngrade: %p\n", &age, &gpa, &grade);
+
+	/*pointers*/
+	int * pAge = &age;
+	double * pGpa = &gpa;
+	char * pGrafe = &grade;
+
+	/*dereferencing pointers*/
+	printf("%d\n", *pAge);
+	printf("%d\n", *&age);
+
+
 	return 0;
 }
