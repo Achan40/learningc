@@ -84,7 +84,35 @@ void Animal::ToString(){
 }
 
 // Inheritance
+class Dog: public Animal{
+private:
+	std::string sound = "Worf";
+public:
+	void MakeSound(){
+		std::cout << "The dog " << 
+		this -> GetName() << " says" << 
+		this -> sound << "\n";
+	}
 
+	Dog(std::string, double, double, std::string);
+	// Default constructor calls the animal constructor
+	Dog(): Animal(){};
+	void ToString();
+
+};
+
+Dog::Dog(std::string name, double height, double weight, std::string sound) : Animal(name, height, weight){
+	this -> sound = sound;
+}
+
+// Overwrite inherited method (Keep in mind variables are in a private class)
+void Dog::ToString(){
+	std::cout << 
+		this -> GetName() << " is " << 
+		this -> GetHeight() << " cms tall and " << 
+		this -> GetWeight() << " kgs in weight and says " <<
+		this -> sound << "\n";
+}
 
 int main(int argc, char const *argv[])
 {
@@ -100,6 +128,11 @@ int main(int argc, char const *argv[])
 	// using the constructor
 	Animal tom("Tom", 36, 15);
 	tom.ToString();
+
+	Dog spot("Spot", 38, 16, "Woof");
+	spot.ToString();
+
+	std::cout << "Number of Animals " << Animal::GetNumOfAnimals() << "\n";
 
 	return 0;
 }
