@@ -6,6 +6,8 @@
 #include <limits>
 #include <fstream>
 
+std::vector<std::string> StringToVecotor(std::string theString, char separator);
+
 class Box {
 public: 
 	double length, width, breath;
@@ -125,9 +127,36 @@ int main(int argc, char const *argv[])
 		while(readFromFile.good()){
 			getline(readFromFile, txtFromFile);
 			std::cout << txtFromFile << "\n";
+
+			std::vector<std::string> vect = StringToVecotor(txtFromFile, ' ');
+			int wordsInLine = vect.size();
+
+			std::cout << "Words in line: " << wordsInLine << "\n";
+
+			int charCount = 0;
+			for(auto word: vect){
+				for(auto letter: word){
+					charCount++;
+				}
+			}
+			int avgNumCharts = charCount/wordsInLine;
+
+			std::cout << "Avg word length: " << avgNumCharts << "\n";
 		}
 		readFromFile.close();
 	}
 
 	return 0;
+}
+
+std::vector<std::string> StringToVecotor(std::string theString, char separator){
+	std::vector<std::string> vecWords;
+	std::stringstream ss(theString);
+
+	std::string sIndivStr;
+
+	while(getline(ss, sIndivStr, separator)){
+		vecWords.push_back(sIndivStr);
+	}
+	return vecWords;
 }
