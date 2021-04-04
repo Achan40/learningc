@@ -37,29 +37,24 @@ std::vector<int> ListOfOdds(std::function<bool(int)> func, std::vector<int> num)
 	return temp;
 }
 
-std::vector<int> GenerateRandVec(int numOfNums){
-	std::vector<int> vecValues;
+std::vector<char> GetHAndTList(std::vector<char> possibleValues, int numberValuesToGenerate){
 	srand(time(NULL));
-	int i = 0, randVal = 0;
-
-	while(i < numOfNums){
-		randVal = 0 + std::rand() % ((1 + 1) - 0);
-		vecValues.push_back(randVal);
-		i ++;
+	std::vector<char> hAndTList;
+	for(int i = 0; i < numberValuesToGenerate; ++i){
+		int randIndex = rand() % 2;
+		hAndTList.push_back(possibleValues[randIndex]);
 	}
-	return vecValues;
+	return hAndTList;
 }
 
-std::vector<std::string> GenerateRandCoin(std::function<std::vector<int>(int)> func, int num){
-	std::vector<std::string> headTail;
-	for(auto i: func(num)){
-		if(i == 0){
-			headTail.push_back('Heads');
-		} else {
-			headTail.push_back('Tails');
+int GetNumberOfMatchers(std::vector<char> list, char valueToFind){
+	int numOfMatchers = 0;
+	for(char i: list){
+		if(i == valueToFind){
+			numOfMatchers++;
 		}
 	}
-	return headTail;
+	return numOfMatchers;
 }
 
 int main(int argc, char const *argv[])
@@ -86,9 +81,18 @@ int main(int argc, char const *argv[])
 	}
 
 	// randomly generate n number of heads or tails
-	std::vector<std::string> randCoin = GenerateRandCoin(GenerateRandVec,100);
-	std::cout << "List of coin flips\n";
-	for(auto i: randCoin){
+	std::vector<char> possibleValues{'H','T'};
+
+	std::vector<char> hList = GetHAndTList(possibleValues,100);
+	std::cout << "Number of Heads: " << GetNumberOfMatchers(hList, 'H') << "\n";
+	std::vector<char> TList = GetHAndTList(possibleValues,100);
+	std::cout << "Number of Tails: " << GetNumberOfMatchers(TList, 'L') << "\n";
+
+	for(auto i: hList){
+		std::cout << i << "\n";
+	}
+
+	for(auto i:TList){
 		std::cout << i << "\n";
 	}
 
