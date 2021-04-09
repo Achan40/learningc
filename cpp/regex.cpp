@@ -157,6 +157,55 @@ int main(int argc, char const *argv[])
 		}
 	}
 
+	//back reference
+	std::string str23 = "The cat cat fell out the window";
+	std::regex reg23("(\\b\\w+)\\s+\\1");
+	PrintMatches3(str23, reg23); 
 
+	//back reference substitution
+	std::string str24 = "<a href='#'><b>The Link</b></a>";
+	std::regex reg24("<b>(.*?)</b>");
+	std::string result;
+
+	std::regex_replace(std::back_inserter(result),str24.begin(), str24.end(), reg24, "$1");
+
+	std::cout << result << "\n";
+
+	std::string str25 = "412-555-1212";
+	std::regex reg25("([\\d]{3})-([\\d]{3}-[\\d]{4})");
+	std::string result2;
+
+	std::regex_replace(std::back_inserter(result2),str25.begin(), str25.end(), reg25, "($1)$2");
+
+	std::cout << result2 << "\n";
+
+	// grab url and output something
+	std::string str26 = "https://www.youtube.com " "http://www.google.com";
+	std::regex reg26("(https?://([\\w.]+))");
+	std::string result3;
+
+	std::regex_replace(std::back_inserter(result3),str26.begin(), str26.end(), reg26, "<a href='$1'>$2</a>\n");
+
+	std::cout << result3 << "\n";
+
+	// look aheads (define pattern and match but not return)
+	std::string str27 = " one two three four ";
+	std::regex reg27("(\\w+(?=\\b))");
+	PrintMatches3(str27, reg27);
+
+	// or condition (define matches that you WILL accept)
+	std::string str28 = "1. Dog 2. cat 3. Turtle";
+	std::regex reg28("\\d\\.\\s(Dog|cat)");
+	PrintMatches3(str28, reg28);
+
+	// practice
+	std::string str29 = "12345 12345-1234 1234 12346-333";
+	std::regex reg29("(\\d{5}-\\d{4}|\\d{5}\\s)");
+	PrintMatches3(str29, reg29);
+
+	std::string str30 = "14125551212 4125551212 (412)5551212 412 555 1212 412-555-1212 1-412-555-1212";
+	std::regex reg30("((1?)(-| ?)(\\()?(\\d{3})(\\)|-| |\\))?(\\d{3})(-| )?(\\d{4}|\\d{4}))");
+	PrintMatches3(str30, reg30);
+ 
 	return 0;
-}
+} 
