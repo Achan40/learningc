@@ -7,6 +7,8 @@ const fib = (n) => {
 };
 
 // using memoization
+// O(n) time complexity
+// O(n) space complexity
 // js object, key will be arg to fun, value will be the return value
 const fibm = (n, memo = {}) => {
     if (n in memo) return memo[n];
