@@ -17,4 +17,21 @@ const fibm = (n, memo = {}) => {
     return memo[n];
 };
 
-console.log(fibm(25))
+// using tabulation
+// O(n) time complexity
+// O(n) space complexity
+const fibt = (n) => {
+    const table = Array(n + 1).fill(0);
+    table[1] = 1;
+    
+    // index out of bounds is undefined in javascript
+    for (let i = 0; i <= n; i++){
+        table[i+1] += table[i];
+        table[i+2] += table[i];
+    }
+
+    return table[n]
+}
+console.log(fibt(5))
+console.log(fibt(25))
+console.log(fibt(35))
