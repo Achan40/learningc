@@ -33,14 +33,38 @@ const cansumM = (targetSum, numbers, memo={}) => {
    return false;
 }
 
-console.log(cansum(7, [2,3])); // true 
-console.log(cansum(7, [5,3,4,7])); // true
-console.log(cansum(7, [2,4])) // false
-console.log(cansum(8, [2,3,5])) // true
+// tabulation
+// O(m*n) time
+// O(m) space
+const cansumT = (targetSum, numbers) => {
+    const table = Array(targetSum + 1).fill(false);
+    table[0] = true;
+
+    for (let i = 0; i <= targetSum; i++){
+        if (table[i] === true) {
+            for (let num of numbers) {
+                table[i + num] = true;
+            }
+        }
+    }
+    return table[targetSum];
+}
+
+
+// console.log(cansum(7, [2,3])); // true 
+// console.log(cansum(7, [5,3,4,7])); // true
+// console.log(cansum(7, [2,4])) // false
+// console.log(cansum(8, [2,3,5])) // true
 // console.log(cansum(300, [7,14])) // false
 
-console.log(cansumM(7, [2,3])); // true 
-console.log(cansumM(7, [5,3,4,7])); // true
-console.log(cansumM(7, [2,4])) // false
-console.log(cansumM(8, [2,3,5])) // true
+// console.log(cansumM(7, [2,3])); // true 
+// console.log(cansumM(7, [5,3,4,7])); // true
+// console.log(cansumM(7, [2,4])) // false
+// console.log(cansumM(8, [2,3,5])) // true
 // console.log(cansum(300, [7,14])) // false
+
+console.log(cansumT(7, [2,3])); // true 
+console.log(cansumT(7, [5,3,4,7])); // true
+console.log(cansumT(7, [2,4])) // false
+console.log(cansumT(8, [2,3,5])) // true
+console.log(cansumT(300, [7,14])) // false
