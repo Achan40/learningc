@@ -43,12 +43,38 @@ const canConstructM = (target, wordBank, memo={}) => {
     return false;
 }
 
-console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"])); // true
-console.log(canConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk","boar"])); // false
-console.log(canConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o","t"])); // true
-// console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeeeeee", "eeeeeeeee", "eeeeeeeeeeee"])); // false
+// tabulation
+// O(m*n*m)
+// O(m)
+const canConstructT = (target, wordBank) => {
+    const table = Array(target.length + 1).fill(false);
+    table[0] = true;
 
-console.log(canConstructM("abcdef", ["ab", "abc", "cd", "def", "abcd"])); // true
-console.log(canConstructM("skateboard", ["bo", "rd", "ate", "t", "ska", "sk","boar"])); // false
-console.log(canConstructM("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o","t"])); // true
-console.log(canConstructM("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeeeeee", "eeeeeeeee", "eeeeeeeeeeee"])); // false
+    for (let i = 0; i < target.length; i++){
+        if (table[i] === true) {
+            for (word of wordBank){
+                // if the word matches the character at position i
+                if (target.slice(i,i + word.length) === word) {
+                    table[i + word.length] = true;
+                }
+            }
+        }
+    }
+    
+    return table[target.length];
+}
+
+// console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"])); // true
+// console.log(canConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk","boar"])); // false
+// console.log(canConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o","t"])); // true
+// // console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeeeeee", "eeeeeeeee", "eeeeeeeeeeee"])); // false
+
+// console.log(canConstructM("abcdef", ["ab", "abc", "cd", "def", "abcd"])); // true
+// console.log(canConstructM("skateboard", ["bo", "rd", "ate", "t", "ska", "sk","boar"])); // false
+// console.log(canConstructM("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o","t"])); // true
+// console.log(canConstructM("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeeeeee", "eeeeeeeee", "eeeeeeeeeeee"])); // false
+
+console.log(canConstructT("abcdef", ["ab", "abc", "cd", "def", "abcd"])); // true
+console.log(canConstructT("skateboard", ["bo", "rd", "ate", "t", "ska", "sk","boar"])); // false
+console.log(canConstructT("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o","t"])); // true
+console.log(canConstructT("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeeeeee", "eeeeeeeee", "eeeeeeeeeeee"])); // false
